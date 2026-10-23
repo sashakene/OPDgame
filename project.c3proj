@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 50600,
+	"savedWithRelease": 50602,
 	"name": "test1_3",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -50,6 +50,13 @@
 		},
 		{
 			"type": "behavior",
+			"id": "jumpthru",
+			"name": "Jump-thru",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "solid",
 			"name": "Solid",
 			"author": "Scirra",
@@ -63,7 +70,8 @@
 			"Keyboard",
 			"Player",
 			"TiledBackground",
-			"TheEndTrigger"
+			"TheEndTrigger",
+			"ladder"
 		],
 		"subfolders": []
 	},
@@ -104,6 +112,14 @@
 					"script-info": {
 						"purpose": "imports-for-events"
 					}
+				},
+				{
+					"name": "player.js",
+					"type": "application/javascript",
+					"sid": 666346252381036,
+					"script-info": {
+						"purpose": "none"
+					}
 				}
 			],
 			"subfolders": [],
@@ -118,16 +134,7 @@
 			"subfolders": []
 		},
 		"video": {
-			"items": [
-				{
-					"name": "Kirby screaming and falling [-G-AuLXhTN4].webm",
-					"type": "video/webm",
-					"sid": 616804623251435,
-					"file-info": {
-						"purpose": "none"
-					}
-				}
-			],
+			"items": [],
 			"subfolders": []
 		},
 		"font": {

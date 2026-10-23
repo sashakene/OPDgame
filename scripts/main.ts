@@ -1,4 +1,4 @@
-
+import * as PlayerScripts from "./player.ts";
 // Import any other script files here, e.g.:
 // import * as myModule from "./mymodule.js";
 
@@ -21,14 +21,13 @@ runOnStartup(async runtime =>
 
 let newlevel:boolean = true;
 let level:number = 1;
-let readyToDash: boolean = true;
 
 function Tick(runtime: IRuntime)
 {
 	
+	const player = runtime.objects.Player.getFirstInstance()!;
 	const mouse = runtime.mouse;
 	const keyboard = runtime.keyboard;
-	const player = runtime.objects.Player.getFirstInstance();
 	
 	if (player!.x>=640 && newlevel) {
         newlevel=false;
@@ -37,56 +36,7 @@ function Tick(runtime: IRuntime)
         newlevel=true;
     }
 
-	if(player!.behaviors.Platform.isOnFloor)
-		readyToDash = true;
-	if (runtime.mouse.isMouseButtonDown(0) && readyToDash)
-		PlayerDash(runtime, player!, mouse);
-	if (readyToDash) {
-		PlayerAnim(runtime, player!, keyboard);
-		PlayerMove(runtime, player!, keyboard);
-	}
-}
-
-function PlayerMove(runtime: IRuntime, player: InstanceType.Player, keyboard: IKeyboardObjectType)
-{
-	if (runtime.keyboard.isKeyDown('KeyW'))
-		player.behaviors.Platform.simulateControl('jump');
-    if (runtime.keyboard.isKeyDown('KeyA') && runtime.keyboard.isKeyDown('KeyD')==false) {
-		player.behaviors.Platform.simulateControl('left');
-		player.width = -Math.abs(player.width);
-	}
-    if (runtime.keyboard.isKeyDown('KeyD') && runtime.keyboard.isKeyDown('KeyA')==false) { 
-		player.behaviors.Platform.simulateControl('right');
-		player.width = Math.abs(player.width);
-	}
-}
-
-function PlayerAnim(runtime: IRuntime, player: InstanceType.Player, keyboard: IKeyboardObjectType)
-{
-	if(player.behaviors.Platform.isOnFloor == false)
-		player.setAnimation('jump');
-	else if (runtime.keyboard.isKeyDown('KeyA') || runtime.keyboard.isKeyDown('KeyD'))
-		player.setAnimation('run');
-	else
-		player.setAnimation('idle');
-}
-
-function PlayerDash(runtime: IRuntime, player: InstanceType.Player, mouse: IMouseObjectType)
-{
-		readyToDash = false;
-		player.angle = Math.atan2(mouse.getMouseY()-player.y, mouse.getMouseX()-player.x);
-		player.behaviors.Bullet.speed = 1500;
-		player.behaviors.Platform.gravity = 0;
-		player.behaviors.Platform.isIgnoringInput = true;
-		player.behaviors.Bullet.isEnabled = true;
-		player.width = Math.abs(player.width)
-		player.setAnimation('dash');
-		
-		setTimeout(() => {
-			player.angle = 0;
-        	player.behaviors.Platform.gravity = 1500;
-        	player.behaviors.Bullet.isEnabled = false;
-        	player.behaviors.Platform.isIgnoringInput = false;
-			player.setAnimation('jump');
-    	}, 200)
+	PlayerScripts.Dash(runtime, player, mouse);
+	PlayerScripts.Anim(runtime, player, keyboard);
+	PlayerScripts.Move(runtime, player, keyboard);
 }

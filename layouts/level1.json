@@ -223,7 +223,7 @@
 					}
 				},
 				{
-					"type": "TiledBackground",
+					"type": "ladder",
 					"properties": {
 						"initially-visible": true,
 						"origin": "top-left",
@@ -241,16 +241,14 @@
 						"blend-margin-x": 0.1,
 						"blend-margin-y": 0.1
 					},
-					"uid": 8,
-					"sid": 260561766519136,
+					"uid": 19,
+					"sid": 586771484154719,
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {
-						"Solid": {
+						"Jumpthru": {
 							"properties": {
-								"enabled": true,
-								"use-instance-tags": true,
-								"tags": ""
+								"enabled": true
 							}
 						}
 					},
@@ -258,10 +256,10 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 145,
-						"y": 313,
-						"width": 175,
-						"height": 28,
+						"x": 153,
+						"y": 342,
+						"width": 169,
+						"height": 21,
 						"originX": 0,
 						"originY": 0,
 						"color": [
